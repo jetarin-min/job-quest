@@ -25,7 +25,7 @@ Please explain what is single-page application and how it work. Give examples of
 
 Single Page application is web application that load HTML and Javascript program in the first time. Once the user make an interactive, browser just make an AJAX request to the server and get only JSON data and then render by itself. The server don't have to render all stuff, just do some API or RPC and serve the data that client (browser) needs. It's better for the user's experience, they won't see any browser flash/refresh.
 Frameworks that can make SPAs are AngularJS, BackboneJS, EmberJS.
-SPAs can even made from some libraries that isn't framework like ReactJS, JQuery and HandlebarJS.
+SPAs can even made from some libraries that isn't fullstack framework like ReactJS, JQuery and HandlebarJS.
 
 Backend Task
 ---
