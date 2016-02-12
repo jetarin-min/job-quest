@@ -24,6 +24,9 @@ Frontend Task
 Please explain what is single-page application and how it work. Give examples of tools used to make SPAs.
 
 *\<Write your answer here>*
+Single Page application is web application that load HTML and Javascript program in the first time. Once the user make an interactive, browser just make an AJAX request to the server and get only JSON data and then render by itself. The server don't have to render all stuff, just do some API or RPC and serve the data that client (browser) needs. It's better for the user's experience, they won't see any browser flash/refresh.
+Frameworks that can make SPAs are AngularJS, BackboneJS, EmberJS.
+SPAs can even made from some libraries that isn't framework like ReactJS, JQuery and HandlebarJS.
 
 Backend Task
 ---
@@ -49,3 +52,6 @@ Backend Task
 What is the difference between MongoDB and MySql?
 
 *\<Write your answer here>*
+MySql is RDBMS (Relational database). It needs pre design for all data structure difficult to maintain. Schema is required and all tables should be normalized in order to conserve storage space. Use SQL command to manipulate the data. In order to use database on new computer, database required migration to adjust schema first.
+
+MongoDB is NoSQL. Usually use for big data structure like social network. Faster and more flexible. Schema is not required; howerver, it required Key-Value just like JSON format (actually it's BSON, contain more data type). Collection should keep all the data necessary to use (Should not make a relation between collections, otherwise it will be slow). Normally use Javascript to manipulate the data. No need to migrate or prepare collection/dabase first, if it is not exist MongoDB will create. 

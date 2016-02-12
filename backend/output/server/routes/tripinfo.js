@@ -21,10 +21,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 router.use(_bodyParser2.default.urlencoded({ extended: false }));
 
-router.get('/', function (req, res) {
+router.get('/', function (req, res, next) {
     _tripinfo2.default.find(function (err, trips) {
         if (err) {
-            res.send({
+            res.json({
                 message: err.message,
                 success: false
             });
@@ -37,7 +37,7 @@ router.get('/:id', function (req, res, next) {
     var id = req.params.id;
     _tripinfo2.default.findOne({ _id: id }, function (err, trip) {
         if (err) {
-            res.send({
+            res.json({
                 message: err.message,
                 success: false
             });
@@ -48,14 +48,13 @@ router.get('/:id', function (req, res, next) {
 });
 router.post('/', function (req, res, next) {
     var trip = new _tripinfo2.default();
-    console.log("BODY" + req.body);
     trip.name = req.body.name;
     trip.price = req.body.price;
     trip.description = req.body.description;
     trip.save(function (err) {
         if (err) {
             console.log(err);
-            res.send({
+            res.json({
                 message: err.message,
                 success: false
             });
@@ -69,12 +68,11 @@ router.post('/', function (req, res, next) {
 });
 router.put('/:id', function (req, res, next) {
     var id = req.params.id;
-    console.log("Edit ID:" + id);
     console.log(req.body);
     _tripinfo2.default.findOneAndUpdate({ _id: id }, req.body, function (err) {
         if (err) {
             console.log(err);
-            res.send({
+            res.json({
                 message: err.message,
                 success: false
             });
@@ -92,7 +90,7 @@ router.delete('/:id', function (req, res, next) {
     _tripinfo2.default.remove({ _id: id }, function (err) {
         if (err) {
             console.log(err);
-            res.send({
+            res.json({
                 message: err.message,
                 success: false
             });

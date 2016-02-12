@@ -5,10 +5,10 @@ import Trip from '../models/tripinfo';
 const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }));
 
-router.get('/', (req, res) => {
-    Trip.find(function(err, trips) {
+router.get('/', (req, res, next) => {
+    Trip.find((err, trips) => {
         if (err){
-            res.send({
+            res.json({
                 message: err.message,
                 success: false,
             });
@@ -18,32 +18,29 @@ router.get('/', (req, res) => {
         }
     }).select("name _id");
 });
-router.get('/:id', function(req, res, next) {
+router.get('/:id', (req, res, next) => {
     var id = req.params.id;
-    Trip.findOne(
-        {_id: id},
-        function(err, trip) {
-            if (err){
-                res.send({
-                    message: err.message,
-                    success: false,
-                });
-            }
-            else{
-                res.json(trip);
-            }
+    Trip.findOne({_id: id}, (err, trip) => {
+        if (err){
+            res.json({
+                message: err.message,
+                success: false,
+            });
+        }
+        else{
+            res.json(trip);
+        }
     });
 });
-router.post('/', function(req, res, next) {
+router.post('/', (req, res, next) => {
     var trip = new Trip;
-    console.log("BODY"+req.body);
     trip.name = req.body.name;
     trip.price = req.body.price;
     trip.description = req.body.description;
-    trip.save(function(err) {
+    trip.save((err) => {
         if (err){
             console.log(err);
-            res.send({
+            res.json({
                 message: err.message,
                 success: false,
             });
@@ -56,48 +53,42 @@ router.post('/', function(req, res, next) {
         }
     });
 });
-router.put('/:id', function(req, res, next) {
+router.put('/:id', (req, res, next) => {
     var id = req.params.id; 
-    console.log("Edit ID:"+id);
     console.log(req.body);
-    Trip.findOneAndUpdate(
-        {_id: id},
-        req.body,
-        function(err) {
-            if (err){
-                console.log(err);
-                res.send({
-                    message: err.message,
-                    success: false,
-                });
-            }
-            else{
-                res.json({
-                    message: 'Trip Edited!',
-                    success: true,
-                });
-            }
+    Trip.findOneAndUpdate({_id: id}, req.body, (err) => {
+        if (err){
+            console.log(err);
+            res.json({
+                message: err.message,
+                success: false,
+            });
+        }
+        else{
+            res.json({
+                message: 'Trip Edited!',
+                success: true,
+            });
+        }
     });
 });
 router.delete('/:id', function(req, res, next) {
     var id = req.params.id; 
     console.log("Delete ID:"+id);
-    Trip.remove(
-        {_id: id},
-        function(err) {
-            if (err){
-                console.log(err);
-                res.send({
-                    message: err.message,
-                    success: false,
-                });
-            }
-            else{
-                res.json({
-                    message: 'Trip Deleted!',
-                    success: true,
-                });
-            }
+    Trip.remove({_id: id}, (err) => {
+        if (err){
+            console.log(err);
+            res.json({
+                message: err.message,
+                success: false,
+            });
+        }
+        else{
+            res.json({
+                message: 'Trip Deleted!',
+                success: true,
+            });
+        }
     });
 });
 

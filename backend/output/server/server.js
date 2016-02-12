@@ -25,5 +25,5 @@ var app = new _express2.default();
 app.use('/trips', _tripinfo2.default);
 
 app.listen('3000', function () {
-    console.log("APP running!");
+    console.log("APP is running on port:3000!");
 });
